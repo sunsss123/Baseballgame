@@ -44,9 +44,10 @@ class MyApp(QWidget):
         # self.lbl = QLabel(self)
         # self.lbl.move(60, 40)
 
-        qle = QLineEdit(self)
-        qle.move(10, 10)
-        qle.textChanged[str].connect(self.onChanged)
+        self.qle = QLineEdit(self)
+        self.qle.resize(100, 20)
+        self.qle.move(10, 10)
+        self.qle.textChanged.connect(self.lineEdit_textChanged)
 
 
         imPlayer1 = QPixmap('player1.png')
@@ -77,7 +78,7 @@ class MyApp(QWidget):
 
         self.center()
         self.setWindowTitle('new_숫자야구')
-        self.resize(800, 600) #화면 크기 변경
+        self.resize(626, 626) #화면 크기 변경
         self.show()
 
         # lbl_img = QLabel()
@@ -113,9 +114,12 @@ class MyApp(QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def onChanged(self, text):
-        self.lbl.setText(text)
-        self.lbl.adjustSize()
+    # def onChanged(self, text):
+    #     self.lbl.setText(text)
+    #     self.lbl.adjustSize()
+
+    def lineEdit_textChanged(self):
+        pass
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
