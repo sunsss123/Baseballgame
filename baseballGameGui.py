@@ -2,7 +2,8 @@
 ##
 ##------------------------------------------------------------------------------------------------##
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QDesktopWidget, QLineEdit
+import baseballgame_2
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QDesktopWidget, QLineEdit, QPushButton, QMessageBox
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
@@ -21,6 +22,8 @@ class MyApp(QWidget):
     base3_Y = 270
     HomeBase_X = 313
     HOmeBase_Y = 503
+
+    newValue = 0
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
@@ -32,6 +35,7 @@ class MyApp(QWidget):
     ##--------------------------------------------------------------------------------------------##
     def initUI(self):
         # vBox = QVBoxLayout()
+        self.baseballGame = baseballgame_2()
 
         imBackground = QPixmap('base.png')
         self.lbBackground = QLabel(self)
@@ -49,6 +53,11 @@ class MyApp(QWidget):
         self.qle.move(10, 10)
         self.qle.textChanged.connect(self.lineEdit_textChanged)
 
+        self.btnOk = QPushButton('&Button1', self)
+        self.btnOk.setText('확인')
+        self.btnOk.resize(30, 20)
+        self.btnOk.move(125, 10)
+        self.btnOk.clicked.connect(self.setOnClickBtnOk(self.baseballGame))
 
         imPlayer1 = QPixmap('player1.png')
         self.lbPlayer1 = QLabel(self)
@@ -60,51 +69,11 @@ class MyApp(QWidget):
         self.lbPlayer2.setPixmap(imPlayer2)
         self.lbPlayer2.move(self.base2_X, self.base2_Y)
 
-        # imPlayer2 = QPixmap('player2.png')
-        # lbPlayer2 = QLabel(self)
-        # lbPlayer2.setPixmap(imPlayer2)
-        # lbPlayer2.move(self.base2_X, self.base2_Y)
-
-        ##----------------------------------------------------------------------------------------##
-        ## vBox
-        ##----------------------------------------------------------------------------------------##
-
-        # vBox.addWidget(lbPlayer1)
-        # vBox.addWidget(lbPlayer2)
-        
-        ##----------------------------------------------------------------------------------------##
-        ##
-        ##----------------------------------------------------------------------------------------##
-
         self.center()
         self.setWindowTitle('new_숫자야구')
         self.resize(626, 626) #화면 크기 변경
         self.show()
 
-        # lbl_img = QLabel()
-        # lbl_img.setPixmap(imBackground)
-        # lbl_size = QLabel('Width: '+str(pixmap.width())+', Height: '+str(pixmap.height()))
-        # lbl_size.setAlignment(Qt.AlignCenter)
-
-        
-        
-        # vbox.addWidget(lbl_size)
-        
-        # self.setLayout(setPlayer1UI(self.base1_X, self.base1_Y))
-
-        
-        # self.move(300, 300)
-        
-        
-        # self.setWindowTitle('My First Application')
-        # self.move(300, 300) #화면 위치 설정
-        # self.resize(800, 600) #화면 크기 변경
-        # self.center() #화면 중앙에 표시
-        # self.show()
-        
-        # self.setWindowTitle('Quit Button')
-        # self.setGeometry(300, 300, 300, 200)
-        # self.show()
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
@@ -120,36 +89,17 @@ class MyApp(QWidget):
 
     def lineEdit_textChanged(self):
         pass
+
+    def setOnClickBtnOk(self, baseballGame):
+        self.getNewValue(baseballGame)
+        QMessageBox.about(self, "message", self.newValue)
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
-    # def setPlayer1UI(base_x, base_Y):
-    #     imPlayer1 = QPixmap('player1.png')
+    def getNewValue(self, baseballGame):
+        self.newValue = baseballGame
 
-    #     lbPlayer1 = QLabel()
-    #     lbPlayer1.setPixmap(imPlayer1)
-        
-    #     print(base_X)
-    #     print(base_Y)
 
-    #     vbox = QVBoxLayout()
-    #     vbox.addWidget(lbPlayer1)
-    #     vbox.move(base1, base2)
-
-    #     return vbox
-    ##--------------------------------------------------------------------------------------------##
-    ##
-    ##--------------------------------------------------------------------------------------------##
-    # def setPlayer2UI(base_X, base_Y):
-    #     imPlayer2 = QPixmap('player2.png')
-
-    #     lbPlayer2 = QLabel()
-    #     lbPlayer2.setPixmap(imPlayer2)
-
-    #     vbox = QVBoxLayout()
-    #     vbox.addWidget(lbPlayer2)
-    #     vbox.move(base1, base2)
-    
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
