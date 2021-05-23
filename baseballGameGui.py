@@ -42,6 +42,17 @@ class MyApp(QWidget):
         self.strikecnt = 0
         self.ballcnt = 0
 
+        self.tmpPlayer1Ball = 0
+        self.tmpPlayer2Ball = 0
+
+        self.isPlayer1 = True
+        self.isPlayer2 = False
+
+        self.cntPlayer1 = 0
+        self.cntPlayer2 = 0
+
+        self.player1Base = 0
+        self.player2Base = 0
 
 
         # self.msg = QMessageBox()
@@ -59,6 +70,12 @@ class MyApp(QWidget):
 
         self.lbl2 = QLabel(str(self.value), self)
         self.lbl2.move(60, 60)
+
+        self.lbPlayer1 = QLabel("player1", self)
+        self.lbPlayer1.move(60, 80)
+
+        self.lbPlayer2 = QLabel("player2", self)
+        self.lbPlayer2.move(60, 100)
 
         self.qle = QLineEdit(self)
         self.qle.resize(100, 20)
@@ -150,8 +167,32 @@ class MyApp(QWidget):
         QMessageBox.about(self, "message", "strike = {}, ball = {}".format(self.strikecnt, self.ballcnt))
         # print("strike = {}, ball = {}".format(strikecnt, ballcnt))
 
+        if self.isPlayer1 == True and self.isPlayer2 == False:
+            if self.player1Base < 4:
+                if self.ballcnt > 0:
+                    self.player1Base += (self.ballcnt + self.tmpPlayer1Ball)/4
+                    self.tmpPlayer1Ball += (self.ballcnt + self.tempPlayer1Ball)%4
+                elif self.strikecnt > 0:
+                    self.player1Base += self.strikecnt
+            elif self.player1Base >= 4:
+                self.cntPlayer1 += self.player1Base/4
+                self.player1Base -= 4*(self.player1Base/4)
+        elif self.isPlayer2 == True and sle.isPlayer1 == False:
+            if self.player2Base < 4:
+                if self.ballcnt > 0:
+                    self.player2Base += (self.ballcnt + self.tmpPlayer2Ball) / 4
+                    self.tmpPlayer2Ball += (self.ballcnt + self.tempPlayer2Ball) % 4
+                elif self.strikecnt > 0:
+                    self.player2Base += self.strikecnt
+            elif self.player2Base >= 4:
+                self.cntPlayer2 += self.player2Base / 4
+                self.player2Base -= 4 * (self.player2Base / 4)
 
+        self.lbPlayer1.setText("s = {}, b = {}, 점수 = {}, 베이스 = {}".format(self.strikecnt, self.ballcnt, self.conPlayer1, self.player1Base))
 
+    # def uiUpdate(self):
+    #     self.lbPlayer1.setText("s = {}, b = {}, 점수 = {}, 베이스 = {}".format(self.strikecnt, self.ballcnt, self.conPlayer1, self.player1Base))
+        # self.lbPlayer1.setText("s = {}, b = {}, 점수 = {}, 베이스 = {}".format(self.strikecnt, self.ballcnt, self.conPlayer1, self.player1Base))
 
     ##--------------------------------------------------------------------------------------------##
     ##
