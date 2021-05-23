@@ -2,11 +2,11 @@
 ##
 ##------------------------------------------------------------------------------------------------##
 import sys
-import baseballgame_2
+import random
+
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QDesktopWidget, QLineEdit, QPushButton, QMessageBox
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
-
 ##------------------------------------------------------------------------------------------------##
 ##
 ##------------------------------------------------------------------------------------------------##
@@ -23,7 +23,7 @@ class MyApp(QWidget):
     HomeBase_X = 313
     HOmeBase_Y = 503
 
-    newValue = 0
+
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
@@ -35,7 +35,19 @@ class MyApp(QWidget):
     ##--------------------------------------------------------------------------------------------##
     def initUI(self):
         # vBox = QVBoxLayout()
-        self.baseballGame = baseballgame_2()
+        self.value = 0
+
+        self.cnt = 0
+        self.guess = []
+        self.strikecnt = 0
+
+        self.strikecnt = 0
+        self.ballcnt = 0
+        self.guess = []
+
+        self.newNumber()
+
+        # self.msg = QMessageBox()
 
         imBackground = QPixmap('base.png')
         self.lbBackground = QLabel(self)
@@ -45,19 +57,22 @@ class MyApp(QWidget):
         # vBox.addWidget(lbBackground)
         # self.setLayout(vBox)
 
-        # self.lbl = QLabel(self)
-        # self.lbl.move(60, 40)
+        self.lbl = QLabel(str(self.value), self)
+        self.lbl.move(60, 40)
+
+        self.lbl2 = QLabel(str(self.value), self)
+        self.lbl2.move(60, 60)
 
         self.qle = QLineEdit(self)
         self.qle.resize(100, 20)
         self.qle.move(10, 10)
         self.qle.textChanged.connect(self.lineEdit_textChanged)
 
-        self.btnOk = QPushButton('&Button1', self)
+        self.btnOk = QPushButton('Button1', self)
         self.btnOk.setText('확인')
         self.btnOk.resize(30, 20)
         self.btnOk.move(125, 10)
-        self.btnOk.clicked.connect(self.setOnClickBtnOk(self.baseballGame))
+        self.btnOk.clicked.connect(self.setOnClickBtnOk)
 
         imPlayer1 = QPixmap('player1.png')
         self.lbPlayer1 = QLabel(self)
@@ -82,23 +97,54 @@ class MyApp(QWidget):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
-
-    # def onChanged(self, text):
-    #     self.lbl.setText(text)
-    #     self.lbl.adjustSize()
-
-    def lineEdit_textChanged(self):
-        pass
-
-    def setOnClickBtnOk(self, baseballGame):
-        self.getNewValue(baseballGame)
-        QMessageBox.about(self, "message", self.newValue)
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
-    def getNewValue(self, baseballGame):
-        self.newValue = baseballGame
+    # def onChanged(self, text):
+    #     self.lbl.setText(text)
+    #     self.lbl.adjustSize()
+    ##--------------------------------------------------------------------------------------------##
+    ##
+    ##--------------------------------------------------------------------------------------------##
+    def lineEdit_textChanged(self):
+        pass
+    ##--------------------------------------------------------------------------------------------##
+    ##
+    ##--------------------------------------------------------------------------------------------##
+    def setOnClickBtnOk(self):
+        # QMessageBox.about(self,"ddddd", "ddddd")
+        self.checkValue()
 
+
+    ##--------------------------------------------------------------------------------------------##
+    ##
+    ##--------------------------------------------------------------------------------------------##
+    def newNumber(self):
+        self.value = random.sample(range(1, 10), 4)
+
+    def checkValue(self):
+        # 초기화
+
+        # for i in range(4):
+        for i in range(4):
+            self.guess.append(int(self.qle.text()[i]))
+            # num = int(input("{}, 1~9까지 숫자를 입력하세요:".format(i)))
+        # self.guess.append(int(self.qle.text()))
+        # self.guess = list()
+            # print(guess)
+
+        for i in range(4):
+            if self.guess[i] == self.value[i]:
+                self.strikecnt = self.strikecnt + 1
+            elif self.guess[i] in self.value:
+                self.ballcnt += 1
+
+        self.lbl2.setText(str(self.guess))
+
+        QMessageBox.about(self, "message", "strike = {}, ball = {}".format(self.strikecnt, self.ballcnt))
+        # print("strike = {}, ball = {}".format(strikecnt, ballcnt))
+
+        self.cnt += 1
 
     ##--------------------------------------------------------------------------------------------##
     ##
