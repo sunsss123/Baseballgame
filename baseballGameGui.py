@@ -40,12 +40,9 @@ class MyApp(QWidget):
         self.cnt = 0
         self.guess = []
         self.strikecnt = 0
-
-        self.strikecnt = 0
         self.ballcnt = 0
-        self.guess = []
 
-        self.newNumber()
+
 
         # self.msg = QMessageBox()
 
@@ -89,6 +86,8 @@ class MyApp(QWidget):
         self.resize(626, 626) #화면 크기 변경
         self.show()
 
+        self.newNumber()
+
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
@@ -112,15 +111,15 @@ class MyApp(QWidget):
     ##
     ##--------------------------------------------------------------------------------------------##
     def setOnClickBtnOk(self):
-        # QMessageBox.about(self,"ddddd", "ddddd")
         self.checkValue()
-
-
+        self.strikecnt = 0
+        self.ballcnt = 0
     ##--------------------------------------------------------------------------------------------##
     ##
     ##--------------------------------------------------------------------------------------------##
     def newNumber(self):
         self.value = random.sample(range(1, 10), 4)
+        self.lbl.setText(str(self.value))
 
     def checkValue(self):
         # 초기화
@@ -128,10 +127,10 @@ class MyApp(QWidget):
         # for i in range(4):
         for i in range(4):
             self.guess.append(int(self.qle.text()[i]))
-            # num = int(input("{}, 1~9까지 숫자를 입력하세요:".format(i)))
+        # num = int(input("{}, 1~9까지 숫자를 입력하세요:".format(i)))
         # self.guess.append(int(self.qle.text()))
         # self.guess = list()
-            # print(guess)
+        # print(guess)
 
         for i in range(4):
             if self.guess[i] == self.value[i]:
@@ -141,10 +140,18 @@ class MyApp(QWidget):
 
         self.lbl2.setText(str(self.guess))
 
+        self.qle.clear()
+        self.lbl.clear()
+        self.lbl2.clear()
+        self.guess.clear()
+
+        self.newNumber()
+
         QMessageBox.about(self, "message", "strike = {}, ball = {}".format(self.strikecnt, self.ballcnt))
         # print("strike = {}, ball = {}".format(strikecnt, ballcnt))
 
-        self.cnt += 1
+
+
 
     ##--------------------------------------------------------------------------------------------##
     ##
