@@ -81,29 +81,3 @@ while cntPlayer1 < 3 and cntPlayer2 < 3: #플레이어 1과 2중 누가 먼저 3
     elif cntPlayer2 == 3:
         print("player2가 승리하였습니다.")
 
-#     if player1Base < 4:
-#         if ballcnt > 0:
-#             player1Base += (ballcnt + tmpPlayer1Ball)/4
-#             tmpPlayer1Ball += (ballcnt + tmpPlayer1Ball)%4
-#         elif strikecnt > 0:
-#             player1Base += strikecnt
-
-
-#     elif player1Base >= 4 and :
-#         cntPlayer1 = cntPlayer1 + player1Base/4
-#         player1Base -= 4*(player1Base/4)
-
-
-#     elif isPlayer2 == True and isPlayer1 == False:
-#         if player2Base < 4:
-#             if ballcnt > 0:
-#                 player2Base += (ballcnt + tmpPlayer2Ball) / 4
-#                 tmpPlayer2Ball += (ballcnt + tmpPlayer2Ball) % 4
-#             elif strikecnt > 0:
-#                 player2Base += strikecnt
-#         elif player2Base >= 4:
-#             cntPlayer2 += player2Base / 4
-#             player2Base -= 4 * (player2Base / 4)
-
-
-# print("{}번 만에 정답".format(cnt))
