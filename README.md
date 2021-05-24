@@ -7,3 +7,6 @@
 	
 # baseballgame_2.py
   랜덤으로 답인 숫자 생성 -> 정답을 맞추는 과정에서 ball, strike 기능 추가 -> 최종적으로 정답까지 횟수 출력
+  
+# numberbaseballgame.py
+  오픈소스를 참고하여 기능 개선 및 추가한 프로젝트
