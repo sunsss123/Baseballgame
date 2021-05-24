@@ -17,7 +17,7 @@ player1Base = 0 #플레이어1의 베이스위치
 player2Base = 0 #플레이어2의 베이스위치
 
 tmpPlayer1Ball = 0 #플레이어1의 누적 볼 수
-tmpPlayer2Ball = 0 #플레이어2의 누적 볼 수
+tmpPlayer2Ball = 0 #플레이어2의 누적 볼 수 
 
 cntPlayer1 = 0 #플레이어1의 점수 카운트
 cntPlayer2 = 0 #플레이어2의 점수 카운트
